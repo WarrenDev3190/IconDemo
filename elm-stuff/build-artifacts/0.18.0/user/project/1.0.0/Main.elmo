@@ -1,0 +1,1490 @@
+var _user$project$Main$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		var _p1 = _elm_lang$core$String$toFloat(_p0._0);
+		if (_p1.ctor === 'Ok') {
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{error: '', sepsisScore: _p1._0});
+		} else {
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{error: _p1._0});
+		}
+	});
+var _user$project$Main$nearestHalf = function (x) {
+	return (_elm_lang$core$Basics$round(x * 2) / 2) | 0;
+};
+var _user$project$Main$skillMix = function (x) {
+	return _elm_lang$core$Basics$sqrt(x) / 0.5;
+};
+var _user$project$Main$acuityRating = function (score) {
+	return _elm_lang$core$Native_Utils.eq(score, 1) ? 'High' : 'Low';
+};
+var _user$project$Main$acuityScale = function (x) {
+	return (1.0 * (x - 1)) / (10 - 1);
+};
+var _user$project$Main$genderScale = function (x) {
+	return (((5 - 1) * (x - 1)) / (10 - 1)) + 1;
+};
+var _user$project$Main$initModel = {sepsisScore: 4, error: ''};
+var _user$project$Main$Model = F2(
+	function (a, b) {
+		return {error: a, sepsisScore: b};
+	});
+var _user$project$Main$ScoreChange = function (a) {
+	return {ctor: 'ScoreChange', _0: a};
+};
+var _user$project$Main$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('wrapper'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('navigation'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$h3,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$style(
+								{
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'padding', _1: '0px 12px'},
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('PRN - Demo'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('row'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('col-xs-1'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('side_navigation'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$ul,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$li,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('MedSurg Unit - 4AE'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$li,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$class('active'),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$i,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$class('icon ion-stats-bars'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$style(
+																			{
+																				ctor: '::',
+																				_0: {ctor: '_Tuple2', _0: 'paddingRight', _1: '5px'},
+																				_1: {
+																					ctor: '::',
+																					_0: {ctor: '_Tuple2', _0: 'display', _1: 'inline-block'},
+																					_1: {ctor: '[]'}
+																				}
+																			}),
+																		_1: {ctor: '[]'}
+																	}
+																},
+																{ctor: '[]'}),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('Dashboard'),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('col-xs-11'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('container'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$div,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('row animated fadeInUp'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$div,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$class('col-xs-12'),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$h1,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$class('display-4'),
+																	_1: {ctor: '[]'}
+																},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('Brandon Regional Medical Center'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$hr,
+																	{ctor: '[]'},
+																	{ctor: '[]'}),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$div,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('row animated fadeInUp'),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$div,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$class('col-xs-12'),
+																_1: {ctor: '[]'}
+															},
+															{
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$h5,
+																	{ctor: '[]'},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text('Critical Metrics'),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$div,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$style(
+																				{
+																					ctor: '::',
+																					_0: {ctor: '_Tuple2', _0: 'display', _1: 'flex'},
+																					_1: {
+																						ctor: '::',
+																						_0: {ctor: '_Tuple2', _0: 'justifyContent', _1: 'space-around'},
+																						_1: {ctor: '[]'}
+																					}
+																				}),
+																			_1: {ctor: '[]'}
+																		},
+																		{
+																			ctor: '::',
+																			_0: A2(
+																				_elm_lang$html$Html$div,
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$class('metric-card'),
+																					_1: {
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Attributes$style(
+																							{
+																								ctor: '::',
+																								_0: {ctor: '_Tuple2', _0: 'display', _1: 'flex'},
+																								_1: {ctor: '[]'}
+																							}),
+																						_1: {ctor: '[]'}
+																					}
+																				},
+																				{
+																					ctor: '::',
+																					_0: A2(
+																						_elm_lang$html$Html$div,
+																						{
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Attributes$class('metric-card__section metric-card__name'),
+																							_1: {ctor: '[]'}
+																						},
+																						{
+																							ctor: '::',
+																							_0: A2(
+																								_elm_lang$html$Html$h4,
+																								{ctor: '[]'},
+																								{
+																									ctor: '::',
+																									_0: _elm_lang$html$Html$text('Quality & Safety'),
+																									_1: {ctor: '[]'}
+																								}),
+																							_1: {
+																								ctor: '::',
+																								_0: A2(
+																									_elm_lang$html$Html$p,
+																									{
+																										ctor: '::',
+																										_0: _elm_lang$html$Html_Attributes$style(
+																											{
+																												ctor: '::',
+																												_0: {ctor: '_Tuple2', _0: 'marginBottom', _1: '5px'},
+																												_1: {
+																													ctor: '::',
+																													_0: {ctor: '_Tuple2', _0: 'color', _1: '#5A65F7'},
+																													_1: {ctor: '[]'}
+																												}
+																											}),
+																										_1: {ctor: '[]'}
+																									},
+																									{
+																										ctor: '::',
+																										_0: _elm_lang$html$Html$text('Ranked 6th Overall'),
+																										_1: {ctor: '[]'}
+																									}),
+																								_1: {
+																									ctor: '::',
+																									_0: A2(
+																										_elm_lang$html$Html$div,
+																										{
+																											ctor: '::',
+																											_0: _elm_lang$html$Html_Attributes$class('trophy-one'),
+																											_1: {ctor: '[]'}
+																										},
+																										{ctor: '[]'}),
+																									_1: {ctor: '[]'}
+																								}
+																							}
+																						}),
+																					_1: {
+																						ctor: '::',
+																						_0: A2(
+																							_elm_lang$html$Html$div,
+																							{
+																								ctor: '::',
+																								_0: _elm_lang$html$Html_Attributes$class('metric-card__section metric-card__controls'),
+																								_1: {ctor: '[]'}
+																							},
+																							{
+																								ctor: '::',
+																								_0: A2(
+																									_elm_lang$html$Html$div,
+																									{
+																										ctor: '::',
+																										_0: _elm_lang$html$Html_Attributes$class('metric-card__icon'),
+																										_1: {ctor: '[]'}
+																									},
+																									{
+																										ctor: '::',
+																										_0: A2(
+																											_elm_lang$html$Html$div,
+																											{ctor: '[]'},
+																											{
+																												ctor: '::',
+																												_0: A2(
+																													_elm_lang$html$Html$div,
+																													{
+																														ctor: '::',
+																														_0: _elm_lang$html$Html_Attributes$class('icon__indicator'),
+																														_1: {ctor: '[]'}
+																													},
+																													{ctor: '[]'}),
+																												_1: {
+																													ctor: '::',
+																													_0: A2(
+																														_elm_lang$html$Html$div,
+																														{ctor: '[]'},
+																														{
+																															ctor: '::',
+																															_0: _elm_lang$html$Html$text('Sepsis'),
+																															_1: {ctor: '[]'}
+																														}),
+																													_1: {ctor: '[]'}
+																												}
+																											}),
+																										_1: {ctor: '[]'}
+																									}),
+																								_1: {
+																									ctor: '::',
+																									_0: A2(
+																										_elm_lang$html$Html$div,
+																										{
+																											ctor: '::',
+																											_0: _elm_lang$html$Html_Attributes$class('metric-card__icon disabled'),
+																											_1: {ctor: '[]'}
+																										},
+																										{
+																											ctor: '::',
+																											_0: A2(
+																												_elm_lang$html$Html$div,
+																												{ctor: '[]'},
+																												{
+																													ctor: '::',
+																													_0: A2(
+																														_elm_lang$html$Html$div,
+																														{
+																															ctor: '::',
+																															_0: _elm_lang$html$Html_Attributes$class('icon__indicator'),
+																															_1: {ctor: '[]'}
+																														},
+																														{ctor: '[]'}),
+																													_1: {
+																														ctor: '::',
+																														_0: A2(
+																															_elm_lang$html$Html$div,
+																															{
+																																ctor: '::',
+																																_0: _elm_lang$html$Html_Attributes$style(
+																																	{
+																																		ctor: '::',
+																																		_0: {ctor: '_Tuple2', _0: 'color', _1: '#E8ECEF'},
+																																		_1: {ctor: '[]'}
+																																	}),
+																																_1: {ctor: '[]'}
+																															},
+																															{
+																																ctor: '::',
+																																_0: _elm_lang$html$Html$text('Diabetes'),
+																																_1: {ctor: '[]'}
+																															}),
+																														_1: {ctor: '[]'}
+																													}
+																												}),
+																											_1: {ctor: '[]'}
+																										}),
+																									_1: {ctor: '[]'}
+																								}
+																							}),
+																						_1: {ctor: '[]'}
+																					}
+																				}),
+																			_1: {
+																				ctor: '::',
+																				_0: A2(
+																					_elm_lang$html$Html$div,
+																					{
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Attributes$class('metric-card'),
+																						_1: {
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Attributes$style(
+																								{
+																									ctor: '::',
+																									_0: {ctor: '_Tuple2', _0: 'display', _1: 'flex'},
+																									_1: {ctor: '[]'}
+																								}),
+																							_1: {ctor: '[]'}
+																						}
+																					},
+																					{
+																						ctor: '::',
+																						_0: A2(
+																							_elm_lang$html$Html$div,
+																							{
+																								ctor: '::',
+																								_0: _elm_lang$html$Html_Attributes$class('metric-card__section metric-card__name'),
+																								_1: {ctor: '[]'}
+																							},
+																							{
+																								ctor: '::',
+																								_0: A2(
+																									_elm_lang$html$Html$h4,
+																									{ctor: '[]'},
+																									{
+																										ctor: '::',
+																										_0: _elm_lang$html$Html$text('People'),
+																										_1: {ctor: '[]'}
+																									}),
+																								_1: {
+																									ctor: '::',
+																									_0: A2(
+																										_elm_lang$html$Html$p,
+																										{
+																											ctor: '::',
+																											_0: _elm_lang$html$Html_Attributes$style(
+																												{
+																													ctor: '::',
+																													_0: {ctor: '_Tuple2', _0: 'color', _1: '#5A65F7'},
+																													_1: {ctor: '[]'}
+																												}),
+																											_1: {ctor: '[]'}
+																										},
+																										{
+																											ctor: '::',
+																											_0: _elm_lang$html$Html$text('Ranked 12th Overall'),
+																											_1: {ctor: '[]'}
+																										}),
+																									_1: {
+																										ctor: '::',
+																										_0: A2(
+																											_elm_lang$html$Html$div,
+																											{
+																												ctor: '::',
+																												_0: _elm_lang$html$Html_Attributes$class('trophy-two'),
+																												_1: {ctor: '[]'}
+																											},
+																											{ctor: '[]'}),
+																										_1: {ctor: '[]'}
+																									}
+																								}
+																							}),
+																						_1: {
+																							ctor: '::',
+																							_0: A2(
+																								_elm_lang$html$Html$div,
+																								{
+																									ctor: '::',
+																									_0: _elm_lang$html$Html_Attributes$class('metric-card__section metric-card__controls'),
+																									_1: {ctor: '[]'}
+																								},
+																								{
+																									ctor: '::',
+																									_0: A2(
+																										_elm_lang$html$Html$div,
+																										{
+																											ctor: '::',
+																											_0: _elm_lang$html$Html_Attributes$class('metric-card__icon disabled'),
+																											_1: {ctor: '[]'}
+																										},
+																										{
+																											ctor: '::',
+																											_0: A2(
+																												_elm_lang$html$Html$div,
+																												{ctor: '[]'},
+																												{
+																													ctor: '::',
+																													_0: A2(
+																														_elm_lang$html$Html$div,
+																														{
+																															ctor: '::',
+																															_0: _elm_lang$html$Html_Attributes$class('icon__indicator'),
+																															_1: {ctor: '[]'}
+																														},
+																														{ctor: '[]'}),
+																													_1: {
+																														ctor: '::',
+																														_0: A2(
+																															_elm_lang$html$Html$div,
+																															{
+																																ctor: '::',
+																																_0: _elm_lang$html$Html_Attributes$style(
+																																	{
+																																		ctor: '::',
+																																		_0: {ctor: '_Tuple2', _0: 'color', _1: '#E8ECEF'},
+																																		_1: {ctor: '[]'}
+																																	}),
+																																_1: {ctor: '[]'}
+																															},
+																															{
+																																ctor: '::',
+																																_0: _elm_lang$html$Html$text('Staffing'),
+																																_1: {ctor: '[]'}
+																															}),
+																														_1: {ctor: '[]'}
+																													}
+																												}),
+																											_1: {ctor: '[]'}
+																										}),
+																									_1: {
+																										ctor: '::',
+																										_0: A2(
+																											_elm_lang$html$Html$div,
+																											{
+																												ctor: '::',
+																												_0: _elm_lang$html$Html_Attributes$class('metric-card__icon disabled'),
+																												_1: {ctor: '[]'}
+																											},
+																											{
+																												ctor: '::',
+																												_0: A2(
+																													_elm_lang$html$Html$div,
+																													{ctor: '[]'},
+																													{
+																														ctor: '::',
+																														_0: A2(
+																															_elm_lang$html$Html$div,
+																															{
+																																ctor: '::',
+																																_0: _elm_lang$html$Html_Attributes$class('icon__indicator'),
+																																_1: {ctor: '[]'}
+																															},
+																															{ctor: '[]'}),
+																														_1: {
+																															ctor: '::',
+																															_0: A2(
+																																_elm_lang$html$Html$div,
+																																{
+																																	ctor: '::',
+																																	_0: _elm_lang$html$Html_Attributes$style(
+																																		{
+																																			ctor: '::',
+																																			_0: {ctor: '_Tuple2', _0: 'color', _1: '#E8ECEF'},
+																																			_1: {ctor: '[]'}
+																																		}),
+																																	_1: {ctor: '[]'}
+																																},
+																																{
+																																	ctor: '::',
+																																	_0: _elm_lang$html$Html$text('Education'),
+																																	_1: {ctor: '[]'}
+																																}),
+																															_1: {ctor: '[]'}
+																														}
+																													}),
+																												_1: {ctor: '[]'}
+																											}),
+																										_1: {ctor: '[]'}
+																									}
+																								}),
+																							_1: {ctor: '[]'}
+																						}
+																					}),
+																				_1: {
+																					ctor: '::',
+																					_0: A2(
+																						_elm_lang$html$Html$div,
+																						{
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Attributes$class('metric-card'),
+																							_1: {
+																								ctor: '::',
+																								_0: _elm_lang$html$Html_Attributes$style(
+																									{
+																										ctor: '::',
+																										_0: {ctor: '_Tuple2', _0: 'display', _1: 'flex'},
+																										_1: {ctor: '[]'}
+																									}),
+																								_1: {ctor: '[]'}
+																							}
+																						},
+																						{
+																							ctor: '::',
+																							_0: A2(
+																								_elm_lang$html$Html$div,
+																								{
+																									ctor: '::',
+																									_0: _elm_lang$html$Html_Attributes$class('metric-card__section metric-card__name'),
+																									_1: {ctor: '[]'}
+																								},
+																								{
+																									ctor: '::',
+																									_0: A2(
+																										_elm_lang$html$Html$h4,
+																										{ctor: '[]'},
+																										{
+																											ctor: '::',
+																											_0: _elm_lang$html$Html$text('Patient Experience'),
+																											_1: {ctor: '[]'}
+																										}),
+																									_1: {
+																										ctor: '::',
+																										_0: A2(
+																											_elm_lang$html$Html$p,
+																											{
+																												ctor: '::',
+																												_0: _elm_lang$html$Html_Attributes$style(
+																													{
+																														ctor: '::',
+																														_0: {ctor: '_Tuple2', _0: 'color', _1: '#5A65F7'},
+																														_1: {ctor: '[]'}
+																													}),
+																												_1: {ctor: '[]'}
+																											},
+																											{
+																												ctor: '::',
+																												_0: _elm_lang$html$Html$text('Ranked 3rd Overall'),
+																												_1: {ctor: '[]'}
+																											}),
+																										_1: {
+																											ctor: '::',
+																											_0: A2(
+																												_elm_lang$html$Html$div,
+																												{
+																													ctor: '::',
+																													_0: _elm_lang$html$Html_Attributes$class('trophy-three'),
+																													_1: {ctor: '[]'}
+																												},
+																												{ctor: '[]'}),
+																											_1: {ctor: '[]'}
+																										}
+																									}
+																								}),
+																							_1: {
+																								ctor: '::',
+																								_0: A2(
+																									_elm_lang$html$Html$div,
+																									{
+																										ctor: '::',
+																										_0: _elm_lang$html$Html_Attributes$class('metric-card__section metric-card__controls'),
+																										_1: {ctor: '[]'}
+																									},
+																									{
+																										ctor: '::',
+																										_0: A2(
+																											_elm_lang$html$Html$div,
+																											{
+																												ctor: '::',
+																												_0: _elm_lang$html$Html_Attributes$class('metric-card__icon disabled'),
+																												_1: {ctor: '[]'}
+																											},
+																											{
+																												ctor: '::',
+																												_0: A2(
+																													_elm_lang$html$Html$div,
+																													{ctor: '[]'},
+																													{
+																														ctor: '::',
+																														_0: A2(
+																															_elm_lang$html$Html$div,
+																															{
+																																ctor: '::',
+																																_0: _elm_lang$html$Html_Attributes$class('icon__indicator '),
+																																_1: {ctor: '[]'}
+																															},
+																															{ctor: '[]'}),
+																														_1: {
+																															ctor: '::',
+																															_0: A2(
+																																_elm_lang$html$Html$div,
+																																{
+																																	ctor: '::',
+																																	_0: _elm_lang$html$Html_Attributes$style(
+																																		{
+																																			ctor: '::',
+																																			_0: {ctor: '_Tuple2', _0: 'color', _1: '#E8ECEF'},
+																																			_1: {ctor: '[]'}
+																																		}),
+																																	_1: {ctor: '[]'}
+																																},
+																																{
+																																	ctor: '::',
+																																	_0: _elm_lang$html$Html$text('Patient Satis...'),
+																																	_1: {ctor: '[]'}
+																																}),
+																															_1: {ctor: '[]'}
+																														}
+																													}),
+																												_1: {ctor: '[]'}
+																											}),
+																										_1: {
+																											ctor: '::',
+																											_0: A2(
+																												_elm_lang$html$Html$div,
+																												{
+																													ctor: '::',
+																													_0: _elm_lang$html$Html_Attributes$class('metric-card__icon disabled'),
+																													_1: {ctor: '[]'}
+																												},
+																												{
+																													ctor: '::',
+																													_0: A2(
+																														_elm_lang$html$Html$div,
+																														{ctor: '[]'},
+																														{
+																															ctor: '::',
+																															_0: A2(
+																																_elm_lang$html$Html$div,
+																																{
+																																	ctor: '::',
+																																	_0: _elm_lang$html$Html_Attributes$class('icon__indicator'),
+																																	_1: {ctor: '[]'}
+																																},
+																																{ctor: '[]'}),
+																															_1: {
+																																ctor: '::',
+																																_0: A2(
+																																	_elm_lang$html$Html$div,
+																																	{
+																																		ctor: '::',
+																																		_0: _elm_lang$html$Html_Attributes$style(
+																																			{
+																																				ctor: '::',
+																																				_0: {ctor: '_Tuple2', _0: 'color', _1: '#E8ECEF'},
+																																				_1: {ctor: '[]'}
+																																			}),
+																																		_1: {ctor: '[]'}
+																																	},
+																																	{
+																																		ctor: '::',
+																																		_0: _elm_lang$html$Html$text('Readmits'),
+																																		_1: {ctor: '[]'}
+																																	}),
+																																_1: {ctor: '[]'}
+																															}
+																														}),
+																													_1: {ctor: '[]'}
+																												}),
+																											_1: {ctor: '[]'}
+																										}
+																									}),
+																								_1: {ctor: '[]'}
+																							}
+																						}),
+																					_1: {
+																						ctor: '::',
+																						_0: A2(
+																							_elm_lang$html$Html$div,
+																							{
+																								ctor: '::',
+																								_0: _elm_lang$html$Html_Attributes$class('metric-card'),
+																								_1: {
+																									ctor: '::',
+																									_0: _elm_lang$html$Html_Attributes$style(
+																										{
+																											ctor: '::',
+																											_0: {ctor: '_Tuple2', _0: 'display', _1: 'flex'},
+																											_1: {ctor: '[]'}
+																										}),
+																									_1: {ctor: '[]'}
+																								}
+																							},
+																							{
+																								ctor: '::',
+																								_0: A2(
+																									_elm_lang$html$Html$div,
+																									{
+																										ctor: '::',
+																										_0: _elm_lang$html$Html_Attributes$class('metric-card__section metric-card__name'),
+																										_1: {ctor: '[]'}
+																									},
+																									{
+																										ctor: '::',
+																										_0: A2(
+																											_elm_lang$html$Html$h4,
+																											{ctor: '[]'},
+																											{
+																												ctor: '::',
+																												_0: _elm_lang$html$Html$text('Growth'),
+																												_1: {ctor: '[]'}
+																											}),
+																										_1: {
+																											ctor: '::',
+																											_0: A2(
+																												_elm_lang$html$Html$p,
+																												{
+																													ctor: '::',
+																													_0: _elm_lang$html$Html_Attributes$style(
+																														{
+																															ctor: '::',
+																															_0: {ctor: '_Tuple2', _0: 'color', _1: '#5A65F7'},
+																															_1: {ctor: '[]'}
+																														}),
+																													_1: {ctor: '[]'}
+																												},
+																												{
+																													ctor: '::',
+																													_0: _elm_lang$html$Html$text('Ranked 13th Overall'),
+																													_1: {ctor: '[]'}
+																												}),
+																											_1: {
+																												ctor: '::',
+																												_0: A2(
+																													_elm_lang$html$Html$div,
+																													{
+																														ctor: '::',
+																														_0: _elm_lang$html$Html_Attributes$class('trophy-four'),
+																														_1: {ctor: '[]'}
+																													},
+																													{ctor: '[]'}),
+																												_1: {ctor: '[]'}
+																											}
+																										}
+																									}),
+																								_1: {
+																									ctor: '::',
+																									_0: A2(
+																										_elm_lang$html$Html$div,
+																										{
+																											ctor: '::',
+																											_0: _elm_lang$html$Html_Attributes$class('metric-card__section metric-card__controls'),
+																											_1: {ctor: '[]'}
+																										},
+																										{
+																											ctor: '::',
+																											_0: A2(
+																												_elm_lang$html$Html$div,
+																												{
+																													ctor: '::',
+																													_0: _elm_lang$html$Html_Attributes$class('metric-card__icon disabled'),
+																													_1: {ctor: '[]'}
+																												},
+																												{
+																													ctor: '::',
+																													_0: A2(
+																														_elm_lang$html$Html$div,
+																														{ctor: '[]'},
+																														{
+																															ctor: '::',
+																															_0: A2(
+																																_elm_lang$html$Html$div,
+																																{
+																																	ctor: '::',
+																																	_0: _elm_lang$html$Html_Attributes$class('icon__indicator '),
+																																	_1: {ctor: '[]'}
+																																},
+																																{ctor: '[]'}),
+																															_1: {
+																																ctor: '::',
+																																_0: A2(
+																																	_elm_lang$html$Html$div,
+																																	{
+																																		ctor: '::',
+																																		_0: _elm_lang$html$Html_Attributes$style(
+																																			{
+																																				ctor: '::',
+																																				_0: {ctor: '_Tuple2', _0: 'color', _1: '#E8ECEF'},
+																																				_1: {ctor: '[]'}
+																																			}),
+																																		_1: {ctor: '[]'}
+																																	},
+																																	{
+																																		ctor: '::',
+																																		_0: _elm_lang$html$Html$text('Denials'),
+																																		_1: {ctor: '[]'}
+																																	}),
+																																_1: {ctor: '[]'}
+																															}
+																														}),
+																													_1: {ctor: '[]'}
+																												}),
+																											_1: {
+																												ctor: '::',
+																												_0: A2(
+																													_elm_lang$html$Html$div,
+																													{
+																														ctor: '::',
+																														_0: _elm_lang$html$Html_Attributes$class('metric-card__icon disabled'),
+																														_1: {ctor: '[]'}
+																													},
+																													{
+																														ctor: '::',
+																														_0: A2(
+																															_elm_lang$html$Html$div,
+																															{ctor: '[]'},
+																															{
+																																ctor: '::',
+																																_0: A2(
+																																	_elm_lang$html$Html$div,
+																																	{
+																																		ctor: '::',
+																																		_0: _elm_lang$html$Html_Attributes$class('icon__indicator'),
+																																		_1: {ctor: '[]'}
+																																	},
+																																	{ctor: '[]'}),
+																																_1: {
+																																	ctor: '::',
+																																	_0: A2(
+																																		_elm_lang$html$Html$div,
+																																		{
+																																			ctor: '::',
+																																			_0: _elm_lang$html$Html_Attributes$style(
+																																				{
+																																					ctor: '::',
+																																					_0: {ctor: '_Tuple2', _0: 'color', _1: '#E8ECEF'},
+																																					_1: {ctor: '[]'}
+																																				}),
+																																			_1: {ctor: '[]'}
+																																		},
+																																		{
+																																			ctor: '::',
+																																			_0: _elm_lang$html$Html$text('Turnover'),
+																																			_1: {ctor: '[]'}
+																																		}),
+																																	_1: {ctor: '[]'}
+																																}
+																															}),
+																														_1: {ctor: '[]'}
+																													}),
+																												_1: {ctor: '[]'}
+																											}
+																										}),
+																									_1: {ctor: '[]'}
+																								}
+																							}),
+																						_1: {ctor: '[]'}
+																					}
+																				}
+																			}
+																		}),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$div,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$class('row animated fadeInUp'),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$div,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$class('row'),
+																	_1: {ctor: '[]'}
+																},
+																{
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$div,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$class('mixer col-xs-8'),
+																			_1: {ctor: '[]'}
+																		},
+																		{
+																			ctor: '::',
+																			_0: A2(
+																				_elm_lang$html$Html$div,
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$style(
+																						{
+																							ctor: '::',
+																							_0: {ctor: '_Tuple2', _0: 'display', _1: 'flex'},
+																							_1: {
+																								ctor: '::',
+																								_0: {ctor: '_Tuple2', _0: 'flexDirection', _1: 'column'},
+																								_1: {ctor: '[]'}
+																							}
+																						}),
+																					_1: {ctor: '[]'}
+																				},
+																				{
+																					ctor: '::',
+																					_0: A2(
+																						_elm_lang$html$Html$input,
+																						{
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Attributes$type_('range'),
+																							_1: {
+																								ctor: '::',
+																								_0: A2(_elm_lang$html$Html_Attributes$attribute, 'orient', 'vertical'),
+																								_1: {
+																									ctor: '::',
+																									_0: _elm_lang$html$Html_Attributes$min('1'),
+																									_1: {
+																										ctor: '::',
+																										_0: _elm_lang$html$Html_Attributes$max('10'),
+																										_1: {
+																											ctor: '::',
+																											_0: _elm_lang$html$Html_Attributes$value(
+																												_elm_lang$core$Basics$toString(model.sepsisScore)),
+																											_1: {
+																												ctor: '::',
+																												_0: _elm_lang$html$Html_Attributes$step('1'),
+																												_1: {
+																													ctor: '::',
+																													_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$ScoreChange),
+																													_1: {ctor: '[]'}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						},
+																						{ctor: '[]'}),
+																					_1: {
+																						ctor: '::',
+																						_0: A2(
+																							_elm_lang$html$Html$h5,
+																							{
+																								ctor: '::',
+																								_0: _elm_lang$html$Html_Attributes$style(
+																									{
+																										ctor: '::',
+																										_0: {ctor: '_Tuple2', _0: 'textAlign', _1: 'center'},
+																										_1: {ctor: '[]'}
+																									}),
+																								_1: {ctor: '[]'}
+																							},
+																							{
+																								ctor: '::',
+																								_0: _elm_lang$html$Html$text(
+																									_elm_lang$core$Basics$toString(10 * model.sepsisScore)),
+																								_1: {ctor: '[]'}
+																							}),
+																						_1: {
+																							ctor: '::',
+																							_0: A2(
+																								_elm_lang$html$Html$h6,
+																								{
+																									ctor: '::',
+																									_0: _elm_lang$html$Html_Attributes$style(
+																										{
+																											ctor: '::',
+																											_0: {ctor: '_Tuple2', _0: 'textAlign', _1: 'center'},
+																											_1: {ctor: '[]'}
+																										}),
+																									_1: {ctor: '[]'}
+																								},
+																								{
+																									ctor: '::',
+																									_0: _elm_lang$html$Html$text('Composite Score'),
+																									_1: {ctor: '[]'}
+																								}),
+																							_1: {ctor: '[]'}
+																						}
+																					}
+																				}),
+																			_1: {
+																				ctor: '::',
+																				_0: A2(
+																					_elm_lang$html$Html$div,
+																					{
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Attributes$style(
+																							{
+																								ctor: '::',
+																								_0: {ctor: '_Tuple2', _0: 'display', _1: 'flex'},
+																								_1: {
+																									ctor: '::',
+																									_0: {ctor: '_Tuple2', _0: 'flexDirection', _1: 'column'},
+																									_1: {ctor: '[]'}
+																								}
+																							}),
+																						_1: {ctor: '[]'}
+																					},
+																					{
+																						ctor: '::',
+																						_0: A2(
+																							_elm_lang$html$Html$input,
+																							{
+																								ctor: '::',
+																								_0: _elm_lang$html$Html_Attributes$type_('range'),
+																								_1: {
+																									ctor: '::',
+																									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'orient', 'vertical'),
+																									_1: {
+																										ctor: '::',
+																										_0: _elm_lang$html$Html_Attributes$min('1'),
+																										_1: {
+																											ctor: '::',
+																											_0: _elm_lang$html$Html_Attributes$max('5'),
+																											_1: {
+																												ctor: '::',
+																												_0: A2(
+																													_elm_lang$html$Html_Attributes$property,
+																													'disabled',
+																													_elm_lang$core$Json_Encode$bool(true)),
+																												_1: {
+																													ctor: '::',
+																													_0: _elm_lang$html$Html_Attributes$step('1'),
+																													_1: {
+																														ctor: '::',
+																														_0: _elm_lang$html$Html_Attributes$value(
+																															_elm_lang$core$Basics$toString(
+																																_user$project$Main$nearestHalf(
+																																	_user$project$Main$genderScale(model.sepsisScore)))),
+																														_1: {ctor: '[]'}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							},
+																							{ctor: '[]'}),
+																						_1: {
+																							ctor: '::',
+																							_0: A2(
+																								_elm_lang$html$Html$h5,
+																								{
+																									ctor: '::',
+																									_0: _elm_lang$html$Html_Attributes$style(
+																										{
+																											ctor: '::',
+																											_0: {ctor: '_Tuple2', _0: 'textAlign', _1: 'center'},
+																											_1: {ctor: '[]'}
+																										}),
+																									_1: {ctor: '[]'}
+																								},
+																								{
+																									ctor: '::',
+																									_0: _elm_lang$html$Html$text(
+																										A2(
+																											_elm_lang$core$Basics_ops['++'],
+																											'5:',
+																											_elm_lang$core$Basics$toString(
+																												_user$project$Main$nearestHalf(
+																													_user$project$Main$genderScale(model.sepsisScore))))),
+																									_1: {ctor: '[]'}
+																								}),
+																							_1: {
+																								ctor: '::',
+																								_0: A2(
+																									_elm_lang$html$Html$h6,
+																									{
+																										ctor: '::',
+																										_0: _elm_lang$html$Html_Attributes$style(
+																											{
+																												ctor: '::',
+																												_0: {ctor: '_Tuple2', _0: 'textAlign', _1: 'center'},
+																												_1: {ctor: '[]'}
+																											}),
+																										_1: {ctor: '[]'}
+																									},
+																									{
+																										ctor: '::',
+																										_0: _elm_lang$html$Html$text('Ratio of Female Patients'),
+																										_1: {ctor: '[]'}
+																									}),
+																								_1: {ctor: '[]'}
+																							}
+																						}
+																					}),
+																				_1: {
+																					ctor: '::',
+																					_0: A2(
+																						_elm_lang$html$Html$div,
+																						{
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Attributes$style(
+																								{
+																									ctor: '::',
+																									_0: {ctor: '_Tuple2', _0: 'display', _1: 'flex'},
+																									_1: {
+																										ctor: '::',
+																										_0: {ctor: '_Tuple2', _0: 'flexDirection', _1: 'column'},
+																										_1: {ctor: '[]'}
+																									}
+																								}),
+																							_1: {ctor: '[]'}
+																						},
+																						{
+																							ctor: '::',
+																							_0: A2(
+																								_elm_lang$html$Html$input,
+																								{
+																									ctor: '::',
+																									_0: _elm_lang$html$Html_Attributes$type_('range'),
+																									_1: {
+																										ctor: '::',
+																										_0: A2(_elm_lang$html$Html_Attributes$attribute, 'orient', 'vertical'),
+																										_1: {
+																											ctor: '::',
+																											_0: _elm_lang$html$Html_Attributes$min('0'),
+																											_1: {
+																												ctor: '::',
+																												_0: _elm_lang$html$Html_Attributes$max('1'),
+																												_1: {
+																													ctor: '::',
+																													_0: A2(
+																														_elm_lang$html$Html_Attributes$property,
+																														'disabled',
+																														_elm_lang$core$Json_Encode$bool(true)),
+																													_1: {
+																														ctor: '::',
+																														_0: _elm_lang$html$Html_Attributes$step('1'),
+																														_1: {
+																															ctor: '::',
+																															_0: _elm_lang$html$Html_Attributes$value(
+																																_elm_lang$core$Basics$toString(
+																																	_user$project$Main$nearestHalf(
+																																		_user$project$Main$acuityScale(model.sepsisScore)))),
+																															_1: {ctor: '[]'}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								},
+																								{ctor: '[]'}),
+																							_1: {
+																								ctor: '::',
+																								_0: A2(
+																									_elm_lang$html$Html$h5,
+																									{
+																										ctor: '::',
+																										_0: _elm_lang$html$Html_Attributes$style(
+																											{
+																												ctor: '::',
+																												_0: {ctor: '_Tuple2', _0: 'textAlign', _1: 'center'},
+																												_1: {ctor: '[]'}
+																											}),
+																										_1: {ctor: '[]'}
+																									},
+																									{
+																										ctor: '::',
+																										_0: _elm_lang$html$Html$text(
+																											_user$project$Main$acuityRating(
+																												_user$project$Main$nearestHalf(
+																													_user$project$Main$acuityScale(model.sepsisScore)))),
+																										_1: {ctor: '[]'}
+																									}),
+																								_1: {
+																									ctor: '::',
+																									_0: A2(
+																										_elm_lang$html$Html$h6,
+																										{
+																											ctor: '::',
+																											_0: _elm_lang$html$Html_Attributes$style(
+																												{
+																													ctor: '::',
+																													_0: {ctor: '_Tuple2', _0: 'textAlign', _1: 'center'},
+																													_1: {ctor: '[]'}
+																												}),
+																											_1: {ctor: '[]'}
+																										},
+																										{
+																											ctor: '::',
+																											_0: _elm_lang$html$Html$text('Intensity'),
+																											_1: {ctor: '[]'}
+																										}),
+																									_1: {ctor: '[]'}
+																								}
+																							}
+																						}),
+																					_1: {
+																						ctor: '::',
+																						_0: A2(
+																							_elm_lang$html$Html$div,
+																							{ctor: '[]'},
+																							{
+																								ctor: '::',
+																								_0: A2(
+																									_elm_lang$html$Html$input,
+																									{
+																										ctor: '::',
+																										_0: _elm_lang$html$Html_Attributes$type_('range'),
+																										_1: {
+																											ctor: '::',
+																											_0: A2(_elm_lang$html$Html_Attributes$attribute, 'orient', 'vertical'),
+																											_1: {
+																												ctor: '::',
+																												_0: _elm_lang$html$Html_Attributes$min(
+																													_elm_lang$core$Basics$toString(
+																														_user$project$Main$nearestHalf(
+																															_user$project$Main$skillMix(1)))),
+																												_1: {
+																													ctor: '::',
+																													_0: _elm_lang$html$Html_Attributes$max(
+																														_elm_lang$core$Basics$toString(
+																															_user$project$Main$nearestHalf(
+																																_user$project$Main$skillMix(10)))),
+																													_1: {
+																														ctor: '::',
+																														_0: A2(
+																															_elm_lang$html$Html_Attributes$property,
+																															'disabled',
+																															_elm_lang$core$Json_Encode$bool(true)),
+																														_1: {
+																															ctor: '::',
+																															_0: _elm_lang$html$Html_Attributes$value(
+																																_elm_lang$core$Basics$toString(
+																																	_user$project$Main$nearestHalf(
+																																		_user$project$Main$skillMix(model.sepsisScore)))),
+																															_1: {ctor: '[]'}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									},
+																									{ctor: '[]'}),
+																								_1: {
+																									ctor: '::',
+																									_0: A2(
+																										_elm_lang$html$Html$h5,
+																										{
+																											ctor: '::',
+																											_0: _elm_lang$html$Html_Attributes$style(
+																												{
+																													ctor: '::',
+																													_0: {ctor: '_Tuple2', _0: 'textAlign', _1: 'center'},
+																													_1: {ctor: '[]'}
+																												}),
+																											_1: {ctor: '[]'}
+																										},
+																										{
+																											ctor: '::',
+																											_0: _elm_lang$html$Html$text(
+																												A2(
+																													_elm_lang$core$Basics_ops['++'],
+																													'21: ',
+																													_elm_lang$core$Basics$toString(
+																														_user$project$Main$nearestHalf(
+																															_user$project$Main$skillMix(model.sepsisScore))))),
+																											_1: {ctor: '[]'}
+																										}),
+																									_1: {
+																										ctor: '::',
+																										_0: A2(
+																											_elm_lang$html$Html$h6,
+																											{
+																												ctor: '::',
+																												_0: _elm_lang$html$Html_Attributes$style(
+																													{
+																														ctor: '::',
+																														_0: {ctor: '_Tuple2', _0: 'textAlign', _1: 'center'},
+																														_1: {ctor: '[]'}
+																													}),
+																												_1: {ctor: '[]'}
+																											},
+																											{
+																												ctor: '::',
+																												_0: _elm_lang$html$Html$text('RN to Tech Ratio'),
+																												_1: {ctor: '[]'}
+																											}),
+																										_1: {ctor: '[]'}
+																									}
+																								}
+																							}),
+																						_1: {ctor: '[]'}
+																					}
+																				}
+																			}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$div,
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$class('graph col-xs-4'),
+																				_1: {ctor: '[]'}
+																			},
+																			{
+																				ctor: '::',
+																				_0: A2(
+																					_elm_lang$html$Html$h3,
+																					{ctor: '[]'},
+																					{
+																						ctor: '::',
+																						_0: _elm_lang$html$Html$text('Projected Growth'),
+																						_1: {ctor: '[]'}
+																					}),
+																				_1: {
+																					ctor: '::',
+																					_0: A2(
+																						_elm_lang$html$Html$canvas,
+																						{
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Attributes$id('canvas'),
+																							_1: {
+																								ctor: '::',
+																								_0: _elm_lang$html$Html_Attributes$height(100),
+																								_1: {
+																									ctor: '::',
+																									_0: _elm_lang$html$Html_Attributes$width(100),
+																									_1: {ctor: '[]'}
+																								}
+																							}
+																						},
+																						{ctor: '[]'}),
+																					_1: {ctor: '[]'}
+																				}
+																			}),
+																		_1: {ctor: '[]'}
+																	}
+																}),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Main$main = _elm_lang$html$Html$beginnerProgram(
+	{model: _user$project$Main$initModel, view: _user$project$Main$view, update: _user$project$Main$update})();

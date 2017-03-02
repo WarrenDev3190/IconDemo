@@ -1,0 +1,101 @@
+var _terezka$elm_plot$Plot_Bars$getXValue = F3(
+	function (_p0, index, data) {
+		var _p1 = _p0;
+		var _p2 = _p1.xValue;
+		if (_p2.ctor === 'Just') {
+			return _p2._0(data);
+		} else {
+			return _elm_lang$core$Basics$toFloat(index) + 1;
+		}
+	});
+var _terezka$elm_plot$Plot_Bars$toBarData = F2(
+	function (transform, allData) {
+		return A2(
+			_elm_lang$core$List$indexedMap,
+			F2(
+				function (index, data) {
+					return {
+						xValue: A3(_terezka$elm_plot$Plot_Bars$getXValue, transform, index, data),
+						yValues: transform.yValues(data)
+					};
+				}),
+			allData);
+	});
+var _terezka$elm_plot$Plot_Bars$customAttrs = F2(
+	function (attrs, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{customAttrs: attrs});
+	});
+var _terezka$elm_plot$Plot_Bars$opacity = F2(
+	function (opacity, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				style: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'opacity',
+						_1: _elm_lang$core$Basics$toString(opacity)
+					},
+					_1: config.style
+				}
+			});
+	});
+var _terezka$elm_plot$Plot_Bars$fill = F2(
+	function (fill, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				style: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'fill', _1: fill},
+					_1: config.style
+				}
+			});
+	});
+var _terezka$elm_plot$Plot_Bars$stackByY = function (config) {
+	return _elm_lang$core$Native_Utils.update(
+		config,
+		{stackBy: _terezka$elm_plot$Internal_Types$Y});
+};
+var _terezka$elm_plot$Plot_Bars$label = F2(
+	function (attributes, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				labelConfig: A3(
+					_elm_lang$core$List$foldl,
+					F2(
+						function (x, y) {
+							return x(y);
+						}),
+					_terezka$elm_plot$Internal_Label$defaultConfig,
+					attributes)
+			});
+	});
+var _terezka$elm_plot$Plot_Bars$maxBarWidthPer = F2(
+	function (max, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				maxWidth: _terezka$elm_plot$Internal_Types$Percentage(max)
+			});
+	});
+var _terezka$elm_plot$Plot_Bars$maxBarWidth = F2(
+	function (max, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				maxWidth: _terezka$elm_plot$Internal_Types$Fixed(max)
+			});
+	});
+var _terezka$elm_plot$Plot_Bars$LabelInfo = F3(
+	function (a, b, c) {
+		return {index: a, xValue: b, yValue: c};
+	});
+var _terezka$elm_plot$Plot_Bars$DataTransformers = F2(
+	function (a, b) {
+		return {yValues: a, xValue: b};
+	});

@@ -1,0 +1,54 @@
+var _terezka$elm_plot$Internal_Line$stdAttributes = F2(
+	function (d, style) {
+		return {
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$d(d),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$style(
+					_terezka$elm_plot$Internal_Draw$toStyle(style)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$class('elm-plot__serie--line'),
+					_1: {ctor: '[]'}
+				}
+			}
+		};
+	});
+var _terezka$elm_plot$Internal_Line$view = F3(
+	function (_p1, _p0, points) {
+		var _p2 = _p1;
+		var _p3 = _p0;
+		var svgPoints = A2(_elm_lang$core$List$map, _p2.toSvgCoords, points);
+		var _p4 = _terezka$elm_plot$Internal_Draw$startPath(svgPoints);
+		var startInstruction = _p4._0;
+		var instructions = A2(_terezka$elm_plot$Internal_Draw$toLineInstructions, _p3.smoothing, svgPoints);
+		var attrs = A2(
+			_elm_lang$core$Basics_ops['++'],
+			A2(
+				_terezka$elm_plot$Internal_Line$stdAttributes,
+				A2(_elm_lang$core$Basics_ops['++'], startInstruction, instructions),
+				_p3.style),
+			_p3.customAttrs);
+		return A2(
+			_elm_lang$svg$Svg$path,
+			attrs,
+			{ctor: '[]'});
+	});
+var _terezka$elm_plot$Internal_Line$defaultConfig = {
+	style: {
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'fill', _1: 'transparent'},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'stroke', _1: 'black'},
+			_1: {ctor: '[]'}
+		}
+	},
+	smoothing: _terezka$elm_plot$Internal_Types$None,
+	customAttrs: {ctor: '[]'}
+};
+var _terezka$elm_plot$Internal_Line$Config = F3(
+	function (a, b, c) {
+		return {style: a, smoothing: b, customAttrs: c};
+	});

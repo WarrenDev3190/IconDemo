@@ -1,0 +1,55 @@
+var _terezka$elm_plot$Internal_Scale$unScaleValue = F2(
+	function (_p0, v) {
+		var _p1 = _p0;
+		return (((v - _p1.offset.lower) * _p1.range) / _p1.length) + _p1.lowest;
+	});
+var _terezka$elm_plot$Internal_Scale$fromSvgCoords = F3(
+	function (xScale, yScale, _p2) {
+		var _p3 = _p2;
+		return {
+			ctor: '_Tuple2',
+			_0: A2(_terezka$elm_plot$Internal_Scale$unScaleValue, xScale, _p3._0),
+			_1: A2(_terezka$elm_plot$Internal_Scale$unScaleValue, yScale, yScale.length - _p3._1)
+		};
+	});
+var _terezka$elm_plot$Internal_Scale$scaleValue = F2(
+	function (_p4, v) {
+		var _p5 = _p4;
+		return ((v * _p5.length) / _p5.range) + _p5.offset.lower;
+	});
+var _terezka$elm_plot$Internal_Scale$toSvgCoordsX = F3(
+	function (xScale, yScale, _p6) {
+		var _p7 = _p6;
+		return {
+			ctor: '_Tuple2',
+			_0: A2(_terezka$elm_plot$Internal_Scale$scaleValue, xScale, _p7._0 - xScale.lowest),
+			_1: A2(_terezka$elm_plot$Internal_Scale$scaleValue, yScale, yScale.highest - _p7._1)
+		};
+	});
+var _terezka$elm_plot$Internal_Scale$toSvgCoordsY = F3(
+	function (xScale, yScale, _p8) {
+		var _p9 = _p8;
+		return A3(
+			_terezka$elm_plot$Internal_Scale$toSvgCoordsX,
+			xScale,
+			yScale,
+			{ctor: '_Tuple2', _0: _p9._1, _1: _p9._0});
+	});
+var _terezka$elm_plot$Internal_Scale$getScale = F6(
+	function (lengthTotal, restrictRange, internalBounds, offset, _p10, values) {
+		var _p11 = _p10;
+		var boundsNatural = A2(
+			_terezka$elm_plot$Internal_Types$Edges,
+			_terezka$elm_plot$Internal_Stuff$getLowest(values),
+			_terezka$elm_plot$Internal_Stuff$getHighest(values));
+		var boundsPadded = A2(_terezka$elm_plot$Internal_Stuff$foldBounds, internalBounds, boundsNatural);
+		var bounds = {
+			lower: restrictRange.lower(boundsPadded.lower),
+			upper: restrictRange.upper(boundsPadded.upper)
+		};
+		var range = A2(_terezka$elm_plot$Internal_Stuff$getRange, bounds.lower, bounds.upper);
+		var length = (lengthTotal - offset.lower) - offset.upper;
+		var paddingTop = A3(_terezka$elm_plot$Internal_Stuff$pixelsToValue, length, range, _p11._1);
+		var paddingBottom = A3(_terezka$elm_plot$Internal_Stuff$pixelsToValue, length, range, _p11._0);
+		return {lowest: bounds.lower - paddingBottom, highest: bounds.upper + paddingTop, range: (range + paddingBottom) + paddingTop, length: length, offset: offset};
+	});

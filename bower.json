@@ -1,0 +1,25 @@
+{
+  "name": "IconDemo",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "WarrenDev3190 <warrendev3190@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/server/public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "animate.css": "^3.5.2",
+    "normalize-css": "normalize.css#^5.0.0",
+    "progressbar.js": "^1.0.1",
+    "chart.js": "^2.5.0"
+  }
+}

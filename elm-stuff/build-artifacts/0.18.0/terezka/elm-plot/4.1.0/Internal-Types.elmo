@@ -1,0 +1,55 @@
+var _terezka$elm_plot$Internal_Types$Edges = F2(
+	function (a, b) {
+		return {lower: a, upper: b};
+	});
+var _terezka$elm_plot$Internal_Types$EdgesAny = F2(
+	function (a, b) {
+		return {lower: a, upper: b};
+	});
+var _terezka$elm_plot$Internal_Types$Oriented = F2(
+	function (a, b) {
+		return {x: a, y: b};
+	});
+var _terezka$elm_plot$Internal_Types$Meta = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return {scale: a, ticks: b, toSvgCoords: c, fromSvgCoords: d, oppositeTicks: e, oppositeToSvgCoords: f, axisCrossings: g, oppositeAxisCrossings: h, getHintInfo: i, toNearestX: j, id: k};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _terezka$elm_plot$Internal_Types$Scale = F5(
+	function (a, b, c, d, e) {
+		return {range: a, lowest: b, highest: c, length: d, offset: e};
+	});
+var _terezka$elm_plot$Internal_Types$HintInfo = F2(
+	function (a, b) {
+		return {xValue: a, yValues: b};
+	});
+var _terezka$elm_plot$Internal_Types$Y = {ctor: 'Y'};
+var _terezka$elm_plot$Internal_Types$X = {ctor: 'X'};
+var _terezka$elm_plot$Internal_Types$Bezier = {ctor: 'Bezier'};
+var _terezka$elm_plot$Internal_Types$None = {ctor: 'None'};
+var _terezka$elm_plot$Internal_Types$Outer = {ctor: 'Outer'};
+var _terezka$elm_plot$Internal_Types$Inner = {ctor: 'Inner'};
+var _terezka$elm_plot$Internal_Types$Percentage = function (a) {
+	return {ctor: 'Percentage', _0: a};
+};
+var _terezka$elm_plot$Internal_Types$Fixed = function (a) {
+	return {ctor: 'Fixed', _0: a};
+};

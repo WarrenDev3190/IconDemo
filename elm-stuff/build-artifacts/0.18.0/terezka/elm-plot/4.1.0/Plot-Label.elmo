@@ -1,0 +1,147 @@
+var _terezka$elm_plot$Plot_Label$formatFromList = F2(
+	function (format, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				format: _terezka$elm_plot$Internal_Label$FromList(format)
+			});
+	});
+var _terezka$elm_plot$Plot_Label$format = F2(
+	function (format, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				format: _terezka$elm_plot$Internal_Label$FromFunc(format)
+			});
+	});
+var _terezka$elm_plot$Plot_Label$viewCustom = F2(
+	function (view, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				viewConfig: _terezka$elm_plot$Internal_Label$FromCustomView(view)
+			});
+	});
+var _terezka$elm_plot$Plot_Label$toStyleConfig = function (styleAttributes) {
+	return A3(
+		_elm_lang$core$List$foldl,
+		F2(
+			function (x, y) {
+				return x(y);
+			}),
+		_terezka$elm_plot$Internal_Label$defaultStyleConfig,
+		styleAttributes);
+};
+var _terezka$elm_plot$Plot_Label$view = F2(
+	function (styles, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				viewConfig: _terezka$elm_plot$Internal_Label$FromStyle(
+					_terezka$elm_plot$Plot_Label$toStyleConfig(styles))
+			});
+	});
+var _terezka$elm_plot$Plot_Label$viewDynamic = F2(
+	function (toStyles, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				viewConfig: _terezka$elm_plot$Internal_Label$FromStyleDynamic(
+					function (_p0) {
+						return _terezka$elm_plot$Plot_Label$toStyleConfig(
+							toStyles(_p0));
+					})
+			});
+	});
+var _terezka$elm_plot$Plot_Label$customAttrs = F2(
+	function (attrs, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{customAttrs: attrs});
+	});
+var _terezka$elm_plot$Plot_Label$fontSize = F2(
+	function (fontSize, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				style: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'font-size',
+						_1: _terezka$elm_plot$Internal_Draw$toPixelsInt(fontSize)
+					},
+					_1: config.style
+				}
+			});
+	});
+var _terezka$elm_plot$Plot_Label$opacity = F2(
+	function (opacity, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				style: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'opacity',
+						_1: _elm_lang$core$Basics$toString(opacity)
+					},
+					_1: config.style
+				}
+			});
+	});
+var _terezka$elm_plot$Plot_Label$fill = F2(
+	function (fill, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				style: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'fill', _1: fill},
+					_1: config.style
+				}
+			});
+	});
+var _terezka$elm_plot$Plot_Label$strokeWidth = F2(
+	function (strokeWidth, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				style: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'stroke-width',
+						_1: _terezka$elm_plot$Internal_Draw$toPixelsInt(strokeWidth)
+					},
+					_1: config.style
+				}
+			});
+	});
+var _terezka$elm_plot$Plot_Label$stroke = F2(
+	function (stroke, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				style: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'stroke', _1: stroke},
+					_1: config.style
+				}
+			});
+	});
+var _terezka$elm_plot$Plot_Label$classes = F2(
+	function (classes, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{classes: classes});
+	});
+var _terezka$elm_plot$Plot_Label$displace = F2(
+	function (displace, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				displace: _elm_lang$core$Maybe$Just(displace)
+			});
+	});

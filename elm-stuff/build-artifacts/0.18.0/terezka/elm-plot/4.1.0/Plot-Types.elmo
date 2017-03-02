@@ -1,0 +1,4 @@
+var _terezka$elm_plot$Plot_Types$HintInfo = F2(
+	function (a, b) {
+		return {xValue: a, yValues: b};
+	});

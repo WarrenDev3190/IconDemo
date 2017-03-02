@@ -1,0 +1,88 @@
+var _terezka$elm_plot$Internal_Tick$defaultView = F3(
+	function (_p1, orientation, _p0) {
+		var _p2 = _p1;
+		var styleFinal = A2(
+			_elm_lang$core$Basics_ops['++'],
+			_p2.style,
+			{
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'stroke-width',
+					_1: _terezka$elm_plot$Internal_Draw$toPixelsInt(_p2.width)
+				},
+				_1: {ctor: '[]'}
+			});
+		var attrs = A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$style(
+					_terezka$elm_plot$Internal_Draw$toStyle(styleFinal)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$y2(
+						_elm_lang$core$Basics$toString(_p2.length)),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$class(
+							A2(
+								_elm_lang$core$String$join,
+								' ',
+								{ctor: '::', _0: 'elm-plot__tick__default-view', _1: _p2.classes})),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			_p2.customAttrs);
+		return A2(
+			_elm_lang$svg$Svg$line,
+			attrs,
+			{ctor: '[]'});
+	});
+var _terezka$elm_plot$Internal_Tick$toViewFromStyleDynamic = F3(
+	function (toStyleConfig, orientation, info) {
+		return A3(
+			_terezka$elm_plot$Internal_Tick$defaultView,
+			toStyleConfig(info),
+			orientation,
+			info);
+	});
+var _terezka$elm_plot$Internal_Tick$toView = function (_p3) {
+	var _p4 = _p3;
+	var _p5 = _p4.viewConfig;
+	switch (_p5.ctor) {
+		case 'FromStyle':
+			return _terezka$elm_plot$Internal_Tick$defaultView(_p5._0);
+		case 'FromStyleDynamic':
+			return _terezka$elm_plot$Internal_Tick$toViewFromStyleDynamic(_p5._0);
+		default:
+			return _p5._0;
+	}
+};
+var _terezka$elm_plot$Internal_Tick$defaultStyleConfig = {
+	length: 7,
+	width: 1,
+	style: {ctor: '[]'},
+	classes: {ctor: '[]'},
+	customAttrs: {ctor: '[]'}
+};
+var _terezka$elm_plot$Internal_Tick$Config = function (a) {
+	return {viewConfig: a};
+};
+var _terezka$elm_plot$Internal_Tick$StyleConfig = F5(
+	function (a, b, c, d, e) {
+		return {length: a, width: b, style: c, classes: d, customAttrs: e};
+	});
+var _terezka$elm_plot$Internal_Tick$FromCustomView = function (a) {
+	return {ctor: 'FromCustomView', _0: a};
+};
+var _terezka$elm_plot$Internal_Tick$FromStyleDynamic = function (a) {
+	return {ctor: 'FromStyleDynamic', _0: a};
+};
+var _terezka$elm_plot$Internal_Tick$FromStyle = function (a) {
+	return {ctor: 'FromStyle', _0: a};
+};
+var _terezka$elm_plot$Internal_Tick$defaultConfig = {
+	viewConfig: _terezka$elm_plot$Internal_Tick$FromStyle(_terezka$elm_plot$Internal_Tick$defaultStyleConfig)
+};

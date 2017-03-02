@@ -1,0 +1,54 @@
+var _terezka$elm_plot$Internal_Scatter$toSvgCircle = F2(
+	function (radius, _p0) {
+		var _p1 = _p0;
+		return A2(
+			_elm_lang$svg$Svg$circle,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$cx(
+					_elm_lang$core$Basics$toString(_p1._0)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$cy(
+						_elm_lang$core$Basics$toString(_p1._1)),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$r(
+							_elm_lang$core$Basics$toString(radius)),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{ctor: '[]'});
+	});
+var _terezka$elm_plot$Internal_Scatter$view = F3(
+	function (_p3, _p2, points) {
+		var _p4 = _p3;
+		var _p5 = _p2;
+		var svgPoints = A2(_elm_lang$core$List$map, _p4.toSvgCoords, points);
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$style(
+					_terezka$elm_plot$Internal_Draw$toStyle(_p5.style)),
+				_1: {ctor: '[]'}
+			},
+			A2(
+				_elm_lang$core$List$map,
+				_terezka$elm_plot$Internal_Scatter$toSvgCircle(_p5.radius),
+				svgPoints));
+	});
+var _terezka$elm_plot$Internal_Scatter$defaultConfig = {
+	style: {
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'fill', _1: 'transparent'},
+		_1: {ctor: '[]'}
+	},
+	customAttrs: {ctor: '[]'},
+	radius: 5
+};
+var _terezka$elm_plot$Internal_Scatter$Config = F3(
+	function (a, b, c) {
+		return {style: a, customAttrs: b, radius: c};
+	});

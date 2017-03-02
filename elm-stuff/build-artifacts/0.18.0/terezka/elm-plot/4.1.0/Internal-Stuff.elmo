@@ -1,0 +1,126 @@
+var _terezka$elm_plot$Internal_Stuff$shareTo = F3(
+	function (shared, toB, toC) {
+		return A2(
+			toC,
+			shared,
+			toB(shared));
+	});
+var _terezka$elm_plot$Internal_Stuff$foldOriented = F3(
+	function (fold, orientation, old) {
+		var _p0 = orientation;
+		if (_p0.ctor === 'X') {
+			return _elm_lang$core$Native_Utils.update(
+				old,
+				{
+					x: fold(old.x)
+				});
+		} else {
+			return _elm_lang$core$Native_Utils.update(
+				old,
+				{
+					y: fold(old.y)
+				});
+		}
+	});
+var _terezka$elm_plot$Internal_Stuff$flipOriented = function (_p1) {
+	var _p2 = _p1;
+	return {x: _p2.y, y: _p2.x};
+};
+var _terezka$elm_plot$Internal_Stuff_ops = _terezka$elm_plot$Internal_Stuff_ops || {};
+_terezka$elm_plot$Internal_Stuff_ops['?'] = F3(
+	function (orientation, x, y) {
+		var _p3 = orientation;
+		if (_p3.ctor === 'X') {
+			return x;
+		} else {
+			return y;
+		}
+	});
+var _terezka$elm_plot$Internal_Stuff$getValues = function (orientation) {
+	var toValue = A3(
+		F2(
+			function (x, y) {
+				return A2(_terezka$elm_plot$Internal_Stuff_ops['?'], x, y);
+			}),
+		orientation,
+		_elm_lang$core$Tuple$first,
+		_elm_lang$core$Tuple$second);
+	return _elm_lang$core$List$map(toValue);
+};
+var _terezka$elm_plot$Internal_Stuff$getDifference = F2(
+	function (a, b) {
+		return _elm_lang$core$Basics$abs(a - b);
+	});
+var _terezka$elm_plot$Internal_Stuff$getClosest = F3(
+	function (value, candidate, closest) {
+		var _p4 = closest;
+		if (_p4.ctor === 'Just') {
+			var _p5 = _p4._0;
+			return (_elm_lang$core$Native_Utils.cmp(
+				A2(_terezka$elm_plot$Internal_Stuff$getDifference, value, candidate),
+				A2(_terezka$elm_plot$Internal_Stuff$getDifference, value, _p5)) < 0) ? _elm_lang$core$Maybe$Just(candidate) : _elm_lang$core$Maybe$Just(_p5);
+		} else {
+			return _elm_lang$core$Maybe$Just(candidate);
+		}
+	});
+var _terezka$elm_plot$Internal_Stuff$toNearest = F2(
+	function (values, value) {
+		return A3(
+			_elm_lang$core$List$foldr,
+			_terezka$elm_plot$Internal_Stuff$getClosest(value),
+			_elm_lang$core$Maybe$Nothing,
+			values);
+	});
+var _terezka$elm_plot$Internal_Stuff$ceilToNearest = F2(
+	function (precision, value) {
+		return _elm_lang$core$Basics$toFloat(
+			_elm_lang$core$Basics$ceiling(value / precision)) * precision;
+	});
+var _terezka$elm_plot$Internal_Stuff$pixelsToValue = F3(
+	function (length, range, pixels) {
+		return (range * pixels) / length;
+	});
+var _terezka$elm_plot$Internal_Stuff$foldBounds = F2(
+	function (oldBounds, newBounds) {
+		var _p6 = oldBounds;
+		if (_p6.ctor === 'Just') {
+			var _p7 = _p6._0;
+			return {
+				lower: A2(_elm_lang$core$Basics$min, _p7.lower, newBounds.lower),
+				upper: A2(_elm_lang$core$Basics$max, _p7.upper, newBounds.upper)
+			};
+		} else {
+			return newBounds;
+		}
+	});
+var _terezka$elm_plot$Internal_Stuff$getRange = F2(
+	function (lowest, highest) {
+		return (_elm_lang$core$Native_Utils.cmp(highest - lowest, 0) > 0) ? (highest - lowest) : 1;
+	});
+var _terezka$elm_plot$Internal_Stuff$getLowest = function (values) {
+	return A2(
+		_elm_lang$core$Maybe$withDefault,
+		0,
+		_elm_lang$core$List$minimum(values));
+};
+var _terezka$elm_plot$Internal_Stuff$getHighest = function (values) {
+	return A2(
+		_elm_lang$core$Maybe$withDefault,
+		10,
+		_elm_lang$core$List$maximum(values));
+};
+var _terezka$elm_plot$Internal_Stuff$getEdges = function (range) {
+	return {
+		ctor: '_Tuple2',
+		_0: _terezka$elm_plot$Internal_Stuff$getLowest(range),
+		_1: _terezka$elm_plot$Internal_Stuff$getHighest(range)
+	};
+};
+var _terezka$elm_plot$Internal_Stuff$getEdgesX = function (points) {
+	return _terezka$elm_plot$Internal_Stuff$getEdges(
+		A2(_elm_lang$core$List$map, _elm_lang$core$Tuple$first, points));
+};
+var _terezka$elm_plot$Internal_Stuff$getEdgesY = function (points) {
+	return _terezka$elm_plot$Internal_Stuff$getEdges(
+		A2(_elm_lang$core$List$map, _elm_lang$core$Tuple$second, points));
+};

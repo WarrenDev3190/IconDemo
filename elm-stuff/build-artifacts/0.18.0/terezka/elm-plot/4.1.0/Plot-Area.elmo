@@ -1,0 +1,67 @@
+var _terezka$elm_plot$Plot_Area$customAttrs = F2(
+	function (attrs, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{customAttrs: attrs});
+	});
+var _terezka$elm_plot$Plot_Area$smoothingBezier = function (config) {
+	return _elm_lang$core$Native_Utils.update(
+		config,
+		{smoothing: _terezka$elm_plot$Internal_Types$Bezier});
+};
+var _terezka$elm_plot$Plot_Area$opacity = F2(
+	function (opacity, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				style: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'opacity',
+						_1: _elm_lang$core$Basics$toString(opacity)
+					},
+					_1: config.style
+				}
+			});
+	});
+var _terezka$elm_plot$Plot_Area$fill = F2(
+	function (fill, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				style: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'fill', _1: fill},
+					_1: config.style
+				}
+			});
+	});
+var _terezka$elm_plot$Plot_Area$strokeWidth = F2(
+	function (strokeWidth, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				style: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'stroke-width',
+						_1: _terezka$elm_plot$Internal_Draw$toPixelsInt(strokeWidth)
+					},
+					_1: config.style
+				}
+			});
+	});
+var _terezka$elm_plot$Plot_Area$stroke = F2(
+	function (stroke, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				style: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'stroke', _1: stroke},
+					_1: config.style
+				}
+			});
+	});

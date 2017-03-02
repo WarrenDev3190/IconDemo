@@ -1,0 +1,99 @@
+var _terezka$elm_plot$Plot_Axis$tickDelta = F2(
+	function (delta, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				tickValues: _terezka$elm_plot$Internal_Axis$FromDelta(delta)
+			});
+	});
+var _terezka$elm_plot$Plot_Axis$tickValues = F2(
+	function (values, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				tickValues: _terezka$elm_plot$Internal_Axis$FromCustom(values)
+			});
+	});
+var _terezka$elm_plot$Plot_Axis$labelValues = F2(
+	function (values, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				labelValues: _elm_lang$core$Maybe$Just(values)
+			});
+	});
+var _terezka$elm_plot$Plot_Axis$label = F2(
+	function (attributes, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				labelConfig: A3(
+					_elm_lang$core$List$foldl,
+					F2(
+						function (x, y) {
+							return x(y);
+						}),
+					_terezka$elm_plot$Internal_Label$defaultConfig,
+					attributes)
+			});
+	});
+var _terezka$elm_plot$Plot_Axis$tick = F2(
+	function (attributes, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				tickConfig: A3(
+					_elm_lang$core$List$foldl,
+					F2(
+						function (x, y) {
+							return x(y);
+						}),
+					_terezka$elm_plot$Internal_Tick$defaultConfig,
+					attributes)
+			});
+	});
+var _terezka$elm_plot$Plot_Axis$cleanCrossings = function (config) {
+	return _elm_lang$core$Native_Utils.update(
+		config,
+		{cleanCrossings: true});
+};
+var _terezka$elm_plot$Plot_Axis$positionHighest = function (config) {
+	return _elm_lang$core$Native_Utils.update(
+		config,
+		{position: _terezka$elm_plot$Internal_Axis$Highest});
+};
+var _terezka$elm_plot$Plot_Axis$positionLowest = function (config) {
+	return _elm_lang$core$Native_Utils.update(
+		config,
+		{position: _terezka$elm_plot$Internal_Axis$Lowest});
+};
+var _terezka$elm_plot$Plot_Axis$anchorInside = function (config) {
+	return _elm_lang$core$Native_Utils.update(
+		config,
+		{anchor: _terezka$elm_plot$Internal_Types$Inner});
+};
+var _terezka$elm_plot$Plot_Axis$line = F2(
+	function (attrs, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				lineConfig: A3(
+					_elm_lang$core$List$foldr,
+					F2(
+						function (x, y) {
+							return x(y);
+						}),
+					_terezka$elm_plot$Internal_Line$defaultConfig,
+					attrs)
+			});
+	});
+var _terezka$elm_plot$Plot_Axis$classes = F2(
+	function (classes, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{classes: classes});
+	});
+var _terezka$elm_plot$Plot_Axis$LabelInfo = F2(
+	function (a, b) {
+		return {value: a, index: b};
+	});

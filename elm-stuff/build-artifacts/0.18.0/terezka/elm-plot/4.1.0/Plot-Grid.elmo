@@ -1,0 +1,35 @@
+var _terezka$elm_plot$Plot_Grid$customAttrs = F2(
+	function (attrs, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{customAttrs: attrs});
+	});
+var _terezka$elm_plot$Plot_Grid$classes = F2(
+	function (classes, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{classes: classes});
+	});
+var _terezka$elm_plot$Plot_Grid$lines = F2(
+	function (attrs, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				linesConfig: A3(
+					_elm_lang$core$List$foldr,
+					F2(
+						function (x, y) {
+							return x(y);
+						}),
+					_terezka$elm_plot$Internal_Line$defaultConfig,
+					attrs)
+			});
+	});
+var _terezka$elm_plot$Plot_Grid$values = F2(
+	function (values, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				values: _terezka$elm_plot$Internal_Grid$CustomValues(values)
+			});
+	});

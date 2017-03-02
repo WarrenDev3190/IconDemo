@@ -1,0 +1,187 @@
+var _terezka$elm_plot$Internal_Hint$viewYValue = F2(
+	function (index, hintValue) {
+		var hintValueDisplayed = function () {
+			var _p0 = hintValue;
+			if (_p0.ctor === 'Just') {
+				var _p2 = _p0._0;
+				var _p1 = _p2;
+				if ((_p1.ctor === '::') && (_p1._1.ctor === '[]')) {
+					return _elm_lang$core$Basics$toString(_p1._0);
+				} else {
+					return _elm_lang$core$Basics$toString(_p2);
+				}
+			} else {
+				return '~';
+			}
+		}();
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$span,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								'Serie ',
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									_elm_lang$core$Basics$toString(index),
+									': '))),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$span,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(hintValueDisplayed),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _terezka$elm_plot$Internal_Hint$defaultView = F2(
+	function (_p3, isLeftSide) {
+		var _p4 = _p3;
+		var classes = {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'elm-plot__hint__default-view', _1: true},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'elm-plot__hint__default-view--left', _1: isLeftSide},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'elm-plot__hint__default-view--right', _1: !isLeftSide},
+					_1: {ctor: '[]'}
+				}
+			}
+		};
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$classList(classes),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								'X: ',
+								_elm_lang$core$Basics$toString(_p4.xValue))),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						A2(_elm_lang$core$List$indexedMap, _terezka$elm_plot$Internal_Hint$viewYValue, _p4.yValues)),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _terezka$elm_plot$Internal_Hint$viewLine = F2(
+	function (style, length) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('elm-plot__hint__line'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$style(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							{
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'height',
+									_1: _terezka$elm_plot$Internal_Draw$toPixels(length)
+								},
+								_1: {ctor: '[]'}
+							},
+							style)),
+					_1: {ctor: '[]'}
+				}
+			},
+			{ctor: '[]'});
+	});
+var _terezka$elm_plot$Internal_Hint$view = F3(
+	function (_p6, _p5, position) {
+		var _p7 = _p6;
+		var _p10 = _p7.scale;
+		var _p8 = _p5;
+		var lineView = {
+			ctor: '::',
+			_0: A2(_terezka$elm_plot$Internal_Hint$viewLine, _p8.lineStyle, _p10.y.length),
+			_1: {ctor: '[]'}
+		};
+		var info = _p7.getHintInfo(
+			_elm_lang$core$Tuple$first(position));
+		var _p9 = _p7.toSvgCoords(
+			{ctor: '_Tuple2', _0: info.xValue, _1: 0});
+		var xSvg = _p9._0;
+		var ySvg = _p9._1;
+		var isLeftSide = _elm_lang$core$Native_Utils.cmp(xSvg - _p10.x.offset.lower, _p10.x.length / 2) < 0;
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('elm-plot__hint'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$style(
+						{
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'left',
+								_1: _terezka$elm_plot$Internal_Draw$toPixels(xSvg)
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'top',
+									_1: _terezka$elm_plot$Internal_Draw$toPixels(_p10.y.offset.lower)
+								},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'position', _1: 'absolute'},
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(_p8.view, info, isLeftSide),
+				_1: lineView
+			});
+	});
+var _terezka$elm_plot$Internal_Hint$defaultConfig = {
+	view: _terezka$elm_plot$Internal_Hint$defaultView,
+	lineStyle: {ctor: '[]'}
+};
+var _terezka$elm_plot$Internal_Hint$Config = F2(
+	function (a, b) {
+		return {view: a, lineStyle: b};
+	});

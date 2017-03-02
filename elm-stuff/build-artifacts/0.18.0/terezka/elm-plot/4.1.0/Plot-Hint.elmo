@@ -1,0 +1,16 @@
+var _terezka$elm_plot$Plot_Hint$viewCustom = F2(
+	function (view, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{view: view});
+	});
+var _terezka$elm_plot$Plot_Hint$lineStyle = F2(
+	function (style, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{lineStyle: style});
+	});
+var _terezka$elm_plot$Plot_Hint$HintInfo = F2(
+	function (a, b) {
+		return {xValue: a, yValues: b};
+	});

@@ -1,0 +1,108 @@
+var _terezka$elm_plot$Plot_Tick$viewCustom = F2(
+	function (view, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				viewConfig: _terezka$elm_plot$Internal_Tick$FromCustomView(
+					_elm_lang$core$Basics$always(view))
+			});
+	});
+var _terezka$elm_plot$Plot_Tick$toStyleConfig = function (attributes) {
+	return A3(
+		_elm_lang$core$List$foldl,
+		F2(
+			function (x, y) {
+				return x(y);
+			}),
+		_terezka$elm_plot$Internal_Tick$defaultStyleConfig,
+		attributes);
+};
+var _terezka$elm_plot$Plot_Tick$view = F2(
+	function (styles, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				viewConfig: _terezka$elm_plot$Internal_Tick$FromStyle(
+					_terezka$elm_plot$Plot_Tick$toStyleConfig(styles))
+			});
+	});
+var _terezka$elm_plot$Plot_Tick$viewDynamic = F2(
+	function (toStyles, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				viewConfig: _terezka$elm_plot$Internal_Tick$FromStyleDynamic(
+					function (_p0) {
+						return _terezka$elm_plot$Plot_Tick$toStyleConfig(
+							toStyles(_p0));
+					})
+			});
+	});
+var _terezka$elm_plot$Plot_Tick$customAttrs = F2(
+	function (attrs, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{customAttrs: attrs});
+	});
+var _terezka$elm_plot$Plot_Tick$opacity = F2(
+	function (opacity, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				style: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'opacity',
+						_1: _elm_lang$core$Basics$toString(opacity)
+					},
+					_1: config.style
+				}
+			});
+	});
+var _terezka$elm_plot$Plot_Tick$strokeWidth = F2(
+	function (strokeWidth, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				style: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'stroke-width',
+						_1: _terezka$elm_plot$Internal_Draw$toPixelsInt(strokeWidth)
+					},
+					_1: config.style
+				}
+			});
+	});
+var _terezka$elm_plot$Plot_Tick$stroke = F2(
+	function (stroke, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{
+				style: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'stroke', _1: stroke},
+					_1: config.style
+				}
+			});
+	});
+var _terezka$elm_plot$Plot_Tick$classes = F2(
+	function (classes, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{classes: classes});
+	});
+var _terezka$elm_plot$Plot_Tick$width = F2(
+	function (width, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{width: width});
+	});
+var _terezka$elm_plot$Plot_Tick$length = F2(
+	function (length, config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{length: length});
+	});

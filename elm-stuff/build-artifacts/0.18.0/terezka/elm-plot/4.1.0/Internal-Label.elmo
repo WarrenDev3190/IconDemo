@@ -1,0 +1,164 @@
+var _terezka$elm_plot$Internal_Label$defaultView = F2(
+	function (_p0, text) {
+		var _p1 = _p0;
+		var _p2 = A2(
+			_elm_lang$core$Maybe$withDefault,
+			{ctor: '_Tuple2', _0: 0, _1: 0},
+			_p1.displace);
+		var dx = _p2._0;
+		var dy = _p2._1;
+		var attrs = A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$transform(
+					_terezka$elm_plot$Internal_Draw$toTranslate(
+						{
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Basics$toFloat(dx),
+							_1: _elm_lang$core$Basics$toFloat(dy)
+						})),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$style(
+						_terezka$elm_plot$Internal_Draw$toStyle(_p1.style)),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$class(
+							A2(
+								_elm_lang$core$String$join,
+								' ',
+								{ctor: '::', _0: 'elm-plot__label__default-view', _1: _p1.classes})),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			_p1.customAttrs);
+		return A2(
+			_elm_lang$svg$Svg$text_,
+			attrs,
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$svg$Svg$tspan,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$svg$Svg$text(text),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _terezka$elm_plot$Internal_Label$viewLabels = F3(
+	function (config, view, infos) {
+		var _p3 = config.format;
+		if (_p3.ctor === 'FromFunc') {
+			return A2(
+				_elm_lang$core$List$map,
+				function (info) {
+					return A2(
+						view,
+						info,
+						_p3._0(info));
+				},
+				infos);
+		} else {
+			return A3(_elm_lang$core$List$map2, view, infos, _p3._0);
+		}
+	});
+var _terezka$elm_plot$Internal_Label$view = F3(
+	function (config, toAttributes, infos) {
+		var _p4 = config.viewConfig;
+		switch (_p4.ctor) {
+			case 'FromStyle':
+				return A3(
+					_terezka$elm_plot$Internal_Label$viewLabels,
+					config,
+					F2(
+						function (info, text) {
+							return A2(
+								_elm_lang$svg$Svg$g,
+								toAttributes(info),
+								{
+									ctor: '::',
+									_0: A2(_terezka$elm_plot$Internal_Label$defaultView, _p4._0, text),
+									_1: {ctor: '[]'}
+								});
+						}),
+					infos);
+			case 'FromStyleDynamic':
+				return A3(
+					_terezka$elm_plot$Internal_Label$viewLabels,
+					config,
+					F2(
+						function (info, text) {
+							return A2(
+								_elm_lang$svg$Svg$g,
+								toAttributes(info),
+								{
+									ctor: '::',
+									_0: A2(
+										_terezka$elm_plot$Internal_Label$defaultView,
+										_p4._0(info),
+										text),
+									_1: {ctor: '[]'}
+								});
+						}),
+					infos);
+			default:
+				return A2(
+					_elm_lang$core$List$map,
+					function (info) {
+						return A2(
+							_elm_lang$svg$Svg$g,
+							toAttributes(info),
+							{
+								ctor: '::',
+								_0: _p4._0(info),
+								_1: {ctor: '[]'}
+							});
+					},
+					infos);
+		}
+	});
+var _terezka$elm_plot$Internal_Label$defaultStyleConfig = {
+	displace: _elm_lang$core$Maybe$Nothing,
+	style: {ctor: '[]'},
+	classes: {ctor: '[]'},
+	customAttrs: {ctor: '[]'}
+};
+var _terezka$elm_plot$Internal_Label$Config = F2(
+	function (a, b) {
+		return {viewConfig: a, format: b};
+	});
+var _terezka$elm_plot$Internal_Label$StyleConfig = F4(
+	function (a, b, c, d) {
+		return {displace: a, style: b, classes: c, customAttrs: d};
+	});
+var _terezka$elm_plot$Internal_Label$FromList = function (a) {
+	return {ctor: 'FromList', _0: a};
+};
+var _terezka$elm_plot$Internal_Label$FromFunc = function (a) {
+	return {ctor: 'FromFunc', _0: a};
+};
+var _terezka$elm_plot$Internal_Label$FromCustomView = function (a) {
+	return {ctor: 'FromCustomView', _0: a};
+};
+var _terezka$elm_plot$Internal_Label$FromStyleDynamic = function (a) {
+	return {ctor: 'FromStyleDynamic', _0: a};
+};
+var _terezka$elm_plot$Internal_Label$FromStyle = function (a) {
+	return {ctor: 'FromStyle', _0: a};
+};
+var _terezka$elm_plot$Internal_Label$defaultConfig = {
+	viewConfig: _terezka$elm_plot$Internal_Label$FromStyle(_terezka$elm_plot$Internal_Label$defaultStyleConfig),
+	format: _terezka$elm_plot$Internal_Label$FromFunc(
+		_elm_lang$core$Basics$always(''))
+};
+var _terezka$elm_plot$Internal_Label$toDefaultConfig = function (format) {
+	return {
+		viewConfig: _terezka$elm_plot$Internal_Label$FromStyle(_terezka$elm_plot$Internal_Label$defaultStyleConfig),
+		format: _terezka$elm_plot$Internal_Label$FromFunc(format)
+	};
+};

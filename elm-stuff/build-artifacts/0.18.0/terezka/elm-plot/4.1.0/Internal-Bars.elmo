@@ -1,0 +1,349 @@
+var _terezka$elm_plot$Internal_Bars$getYValues = F2(
+	function (xValue, groups) {
+		return _elm_lang$core$Tuple$second(
+			A2(
+				_elm_lang$core$Maybe$withDefault,
+				{ctor: '_Tuple2', _0: 0, _1: _elm_lang$core$Maybe$Nothing},
+				_elm_lang$core$List$head(
+					A2(
+						_elm_lang$core$List$filter,
+						function (_p0) {
+							var _p1 = _p0;
+							return _elm_lang$core$Native_Utils.eq(_p1._0, xValue);
+						},
+						A2(
+							_elm_lang$core$List$map,
+							function (_p2) {
+								var _p3 = _p2;
+								return {
+									ctor: '_Tuple2',
+									_0: _p3.xValue,
+									_1: _elm_lang$core$Maybe$Just(_p3.yValues)
+								};
+							},
+							groups)))));
+	});
+var _terezka$elm_plot$Internal_Bars$foldPoints = F3(
+	function (_p5, _p4, points) {
+		var _p6 = _p5;
+		var _p7 = _p4;
+		var _p10 = _p7.yValues;
+		var _p9 = _p7.xValue;
+		if (_elm_lang$core$Native_Utils.eq(_p6.stackBy, _terezka$elm_plot$Internal_Types$X)) {
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				points,
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: _p9,
+						_1: _terezka$elm_plot$Internal_Stuff$getLowest(_p10)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: _p9,
+							_1: _terezka$elm_plot$Internal_Stuff$getHighest(_p10)
+						},
+						_1: {ctor: '[]'}
+					}
+				});
+		} else {
+			var _p8 = A2(
+				_elm_lang$core$List$partition,
+				function (y) {
+					return _elm_lang$core$Native_Utils.cmp(y, 0) > -1;
+				},
+				_p10);
+			var positive = _p8._0;
+			var negative = _p8._1;
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				points,
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: _p9,
+						_1: _elm_lang$core$List$sum(positive)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: _p9,
+							_1: _elm_lang$core$List$sum(negative)
+						},
+						_1: {ctor: '[]'}
+					}
+				});
+		}
+	});
+var _terezka$elm_plot$Internal_Bars$toPoints = F2(
+	function (config, groups) {
+		return A3(
+			_elm_lang$core$List$foldl,
+			_terezka$elm_plot$Internal_Bars$foldPoints(config),
+			{ctor: '[]'},
+			groups);
+	});
+var _terezka$elm_plot$Internal_Bars$toBarWidth = F3(
+	function (_p11, groups, $default) {
+		var _p12 = _p11;
+		var _p13 = _p12.maxWidth;
+		if (_p13.ctor === 'Percentage') {
+			return ($default * _elm_lang$core$Basics$toFloat(_p13._0)) / 100;
+		} else {
+			var _p14 = _p13._0;
+			return (_elm_lang$core$Native_Utils.cmp(
+				$default,
+				_elm_lang$core$Basics$toFloat(_p14)) > 0) ? _elm_lang$core$Basics$toFloat(_p14) : $default;
+		}
+	});
+var _terezka$elm_plot$Internal_Bars$toAutoWidth = F4(
+	function (_p16, _p15, styleConfigs, groups) {
+		var _p17 = _p16;
+		var _p20 = _p17.scale;
+		var _p18 = _p15;
+		var width = function () {
+			var _p19 = _p18.stackBy;
+			if (_p19.ctor === 'X') {
+				return 1 / _elm_lang$core$Basics$toFloat(
+					_elm_lang$core$List$length(styleConfigs));
+			} else {
+				return 1;
+			}
+		}();
+		return (width * _p20.x.length) / _p20.x.range;
+	});
+var _terezka$elm_plot$Internal_Bars$placeLabel = F2(
+	function (width, _p21) {
+		var _p22 = _p21;
+		return {
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$transform(
+				_terezka$elm_plot$Internal_Draw$toTranslate(
+					{ctor: '_Tuple2', _0: _p22._0 + (width / 2), _1: _p22._1})),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$style('text-anchor: middle;'),
+				_1: {ctor: '[]'}
+			}
+		};
+	});
+var _terezka$elm_plot$Internal_Bars$toYStackedOffset = F2(
+	function (_p24, _p23) {
+		var _p25 = _p24;
+		var _p26 = _p23;
+		return _elm_lang$core$List$sum(
+			A2(
+				_elm_lang$core$List$filter,
+				function (y) {
+					return _elm_lang$core$Native_Utils.eq(
+						_elm_lang$core$Native_Utils.cmp(y, 0) < 0,
+						_elm_lang$core$Native_Utils.cmp(_p26.yValue, 0) < 0);
+				},
+				A2(_elm_lang$core$List$take, _p26.index, _p25.yValues)));
+	});
+var _terezka$elm_plot$Internal_Bars$toXStackedOffset = F3(
+	function (styleConfigs, width, _p27) {
+		var _p28 = _p27;
+		var offsetBar = _elm_lang$core$Basics$toFloat(_p28.index) * width;
+		var offsetGroup = (_elm_lang$core$Basics$toFloat(
+			_elm_lang$core$List$length(styleConfigs)) * width) / 2;
+		return offsetBar - offsetGroup;
+	});
+var _terezka$elm_plot$Internal_Bars$toLengthTouchingXAxis = F3(
+	function (_p30, config, _p29) {
+		var _p31 = _p30;
+		var _p33 = _p31.scale;
+		var _p32 = _p29;
+		return ((_p32.yValue - A3(_elm_lang$core$Basics$clamp, _p33.y.lowest, _p33.y.highest, 0)) * _p33.y.length) / _p33.y.range;
+	});
+var _terezka$elm_plot$Internal_Bars$toLength = F3(
+	function (meta, config, bar) {
+		var _p34 = config.stackBy;
+		if (_p34.ctor === 'X') {
+			return A3(_terezka$elm_plot$Internal_Bars$toLengthTouchingXAxis, meta, config, bar);
+		} else {
+			return _elm_lang$core$Native_Utils.eq(bar.index, 0) ? A3(_terezka$elm_plot$Internal_Bars$toLengthTouchingXAxis, meta, config, bar) : ((bar.yValue * meta.scale.y.length) / meta.scale.y.range);
+		}
+	});
+var _terezka$elm_plot$Internal_Bars$toStackedCoords = F6(
+	function (meta, config, styleConfigs, width, group, bar) {
+		var _p35 = config.stackBy;
+		if (_p35.ctor === 'X') {
+			return A2(
+				_terezka$elm_plot$Internal_Draw$addDisplacement,
+				{
+					ctor: '_Tuple2',
+					_0: A3(_terezka$elm_plot$Internal_Bars$toXStackedOffset, styleConfigs, width, bar),
+					_1: 0
+				},
+				meta.toSvgCoords(
+					{
+						ctor: '_Tuple2',
+						_0: bar.xValue,
+						_1: A2(
+							_elm_lang$core$Basics$max,
+							A2(_elm_lang$core$Basics$min, 0, meta.scale.y.highest),
+							bar.yValue)
+					}));
+		} else {
+			return A2(
+				_terezka$elm_plot$Internal_Draw$addDisplacement,
+				{
+					ctor: '_Tuple2',
+					_0: (0 - width) / 2,
+					_1: A2(
+						_elm_lang$core$Basics$min,
+						0,
+						A3(_terezka$elm_plot$Internal_Bars$toLength, meta, config, bar))
+				},
+				meta.toSvgCoords(
+					A2(
+						_terezka$elm_plot$Internal_Draw$addDisplacement,
+						{
+							ctor: '_Tuple2',
+							_0: 0,
+							_1: A2(_terezka$elm_plot$Internal_Bars$toYStackedOffset, group, bar)
+						},
+						{ctor: '_Tuple2', _0: bar.xValue, _1: bar.yValue})));
+		}
+	});
+var _terezka$elm_plot$Internal_Bars$viewBar = F6(
+	function (meta, width, _p36, config, styleConfig, info) {
+		var _p37 = _p36;
+		return A2(
+			_elm_lang$svg$Svg$rect,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				{
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$x(
+						_elm_lang$core$Basics$toString(_p37._0)),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$y(
+							_elm_lang$core$Basics$toString(_p37._1)),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$width(
+								_elm_lang$core$Basics$toString(width)),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$height(
+									_elm_lang$core$Basics$toString(
+										_elm_lang$core$Basics$abs(
+											A3(_terezka$elm_plot$Internal_Bars$toLength, meta, config, info)))),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$style(
+										_terezka$elm_plot$Internal_Draw$toStyle(styleConfig.style)),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				styleConfig.customAttrs),
+			{ctor: '[]'});
+	});
+var _terezka$elm_plot$Internal_Bars$viewGroup = F5(
+	function (meta, config, styleConfigs, width, group) {
+		var toCoords = A5(_terezka$elm_plot$Internal_Bars$toStackedCoords, meta, config, styleConfigs, width, group);
+		var labelInfos = A2(
+			_elm_lang$core$List$indexedMap,
+			F2(
+				function (i, y) {
+					return {index: i, xValue: group.xValue, yValue: y};
+				}),
+			group.yValues);
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$svg$Svg$g,
+					{ctor: '[]'},
+					A3(
+						_elm_lang$core$List$map2,
+						F2(
+							function (styleConfig, info) {
+								return A6(
+									_terezka$elm_plot$Internal_Bars$viewBar,
+									meta,
+									width,
+									toCoords(info),
+									config,
+									styleConfig,
+									info);
+							}),
+						styleConfigs,
+						labelInfos)),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$svg$Svg$g,
+						{ctor: '[]'},
+						A3(
+							_terezka$elm_plot$Internal_Label$view,
+							config.labelConfig,
+							function (info) {
+								return A2(
+									_terezka$elm_plot$Internal_Bars$placeLabel,
+									width,
+									toCoords(info));
+							},
+							labelInfos)),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _terezka$elm_plot$Internal_Bars$view = F4(
+	function (meta, config, styleConfigs, groups) {
+		var width = A3(
+			_terezka$elm_plot$Internal_Bars$toBarWidth,
+			config,
+			groups,
+			A4(_terezka$elm_plot$Internal_Bars$toAutoWidth, meta, config, styleConfigs, groups));
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{ctor: '[]'},
+			A2(
+				_elm_lang$core$List$map,
+				A4(_terezka$elm_plot$Internal_Bars$viewGroup, meta, config, styleConfigs, width),
+				groups));
+	});
+var _terezka$elm_plot$Internal_Bars$defaultStyleConfig = {
+	style: {
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'stroke', _1: 'transparent'},
+		_1: {ctor: '[]'}
+	},
+	customAttrs: {ctor: '[]'}
+};
+var _terezka$elm_plot$Internal_Bars$defaultConfig = {
+	stackBy: _terezka$elm_plot$Internal_Types$X,
+	labelConfig: _terezka$elm_plot$Internal_Label$defaultConfig,
+	maxWidth: _terezka$elm_plot$Internal_Types$Percentage(100)
+};
+var _terezka$elm_plot$Internal_Bars$Group = F2(
+	function (a, b) {
+		return {xValue: a, yValues: b};
+	});
+var _terezka$elm_plot$Internal_Bars$Config = F3(
+	function (a, b, c) {
+		return {stackBy: a, labelConfig: b, maxWidth: c};
+	});
+var _terezka$elm_plot$Internal_Bars$StyleConfig = F2(
+	function (a, b) {
+		return {style: a, customAttrs: b};
+	});
+var _terezka$elm_plot$Internal_Bars$LabelInfo = F3(
+	function (a, b, c) {
+		return {index: a, xValue: b, yValue: c};
+	});
